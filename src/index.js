@@ -96,5 +96,3 @@ export const semantics = grammar.createSemantics().addOperation('eval', {
     return null
   }
 })
-
-export default parse

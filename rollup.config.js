@@ -2,6 +2,7 @@ import babel from 'rollup-plugin-babel'
 import resolve from 'rollup-plugin-node-resolve'
 import commonjs from 'rollup-plugin-commonjs'
 import alias from 'rollup-plugin-alias'
+import json from 'rollup-plugin-json'
 import { uglify } from 'rollup-plugin-uglify'
 
 import path from 'path'
@@ -17,17 +18,19 @@ export default {
     { file: pkg.main, format: 'cjs', sourcemap: !isProd }
   ],
   external: id => [
+    'ohm-js',
     '@babel/runtime',
   ].some(s => id.includes(s)),
   plugins: [
-    alias({
-      '@': path.resolve(__dirname, './src'),
-      '~@': path.resolve(__dirname, './node_modules')
-    }),
     resolve({
       jsnext: true,
       main: true,
-      browser: true
+      browser: false
+    }),
+    json(),
+    alias({
+      '@': path.resolve(__dirname, './src'),
+      '~@': path.resolve(__dirname, './node_modules')
     }),
     babel({
       exclude: 'node_modules/**',
