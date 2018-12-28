@@ -1,4 +1,4 @@
-import parse from 'src/index.js'
+import { parse } from 'src/index.js'
 
 it('should init success', () => {
   const str = `
